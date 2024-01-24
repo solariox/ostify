@@ -11,6 +11,9 @@
         <a href="{{ path('app_logout') }}">Logout</a>
     {% else %}
         <a href="{{ path('app_login') }}">Login</a>
+        <hr>
+        OR
+        <hr>
         {% include 'steam/login_steam.html.twig' %}
     {% endif %}
 

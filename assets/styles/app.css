@@ -1,6 +1,3 @@
-body {
-    background-color: lightgray;
-}
 /* set full size background img*/
 html {
   background: url(../images/doge.jpg) no-repeat center center fixed;
@@ -8,4 +5,11 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+body{
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.5);
+    padding: 20px;
+    margin: 20px;
+    background-color: rgba(90, 109, 173, 0.8);
 }
