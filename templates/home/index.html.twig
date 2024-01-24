@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Hello</h1>
+    </div>
+    {% if app.user %}
+        Hi {{ app.user.email }}
+        <a href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ path('app_login') }}">Login</a>
+        {% include 'steam/login_steam.html.twig' %}
+    {% endif %}
+
+{% endblock %}
