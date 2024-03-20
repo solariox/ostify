@@ -9,7 +9,7 @@ If it finds a soundtrack it will suggest it to you and you can choose to add it 
 
 ## steps of development
 
--  [ ] can be logged into steam
+-  [ ] can get info from steam
    - inspired by https://github.com/knojector/SteamAuthenticationBundle/tree/bde0d51d2768857f78fa0372a85f2f2b0a933024
    - Create a button that redirects to the steam login page, with the callback url being the login page of the app
 - [ ] can get the list of games from steam
@@ -22,3 +22,4 @@ If it finds a soundtrack it will suggest it to you and you can choose to add it 
 
 ## Docs
 https://steamcommunity.com/dev
+https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0001.29
