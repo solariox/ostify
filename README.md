@@ -1,50 +1,49 @@
-# Symfony Docker
+## The main goal
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
+The main goal of this project is to create a simple and easy to use tool for creating spotify library playlists based on your steam account. 
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+## How it works
 
-## Getting Started
+The program will scan your steam account for games that have a soundtrack and then search spotify for the soundtrack. 
+If it finds a soundtrack it will suggest it to you and you can choose to add it to your library or not.
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --no-cache` to build fresh images
-3. Run `docker compose up --pull always -d --wait` to start the project
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. run `docker compose exec php bin/console asset-map:compile` to compile the assets 
-6. Run `docker compose down --remove-orphans` to stop the Docker containers. 
+## Explanation of the project structure
+See ([config](CONFIG.md)) to see the doc of how run the project
 
-## Features
+ code structure based on hexagonal/clean architecture, inspired by https://github.com/Grafikart/Grafikart.fr/
+this is more of a long term goal, but it will help me to keep the code clean and organized. It will also help me to keep the code testable and easy to maintain.
+Also, I admit this is a bit overkill for a small project like this, but it's a good opportunity to learn and practice this architecture.
+- Domain will be the core of the application, it will contain the entities, events, subscribers, and services. 
+  All of this need to be isolated, and it needs to communicate with the application layer only through services.
+  For example, controllers don't need to call repositories directly, they need to call services that will call repositories.
+- Http will be the application layer, it will contain the controllers, Forms, API related stuff, Admin related stuff, and so on.
+- Command will be the command layer, it will contain the commands that can be run from the console.
+- Infrastructure will be the infrastructure layer, it will contain the system related stuff, in opposite to the domain layer that will contain the business logic. 
+  We will have stuffs like fixtures, ORM, Security...
+  
+## steps of development
+# 1 - Initial POC 
+- [ ] Create an account on the app. 
+- [ ] can get info from steam
+   - inspired by https://github.com/knojector/SteamAuthenticationBundle/tree/bde0d51d2768857f78fa0372a85f2f2b0a933024
+   - Create a button that redirects to the steam login page, with the callback url being the login page of the app
+- [ ] can get the list of games from steam
+- [ ] can get the list of soundtracks from steam
 
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
+- [ ] can be logged into spotify
+- [ ] can get the list of favorites albums/artists from spotify
+- [ ] check if a soundtrack is already in the library
+- [ ] can add a soundtrack to the library
 
-**Enjoy!**
+- [ ] Dont forget to add tests
+
+# 2 - Improvement 
+- [ ] Use another API for the game part, like Epic, GOG, origin, PSN, Xbox, etc...
+- [ ] Use another API for the music part, like Deezer, Apple Music, Youtube Music, etc...
+- [ ] Use another API for the initial login part. Maybe keycloak,  Google, Facebook, Twitter, etc...
+- [ ] Add social features, like sharing playlists, following other users, etc...
+- [ ] Add a recommendation system, based on the games you play, the music you listen to, the games you own, etc...
 
 ## Docs
-
-1. [Build options](docs/build.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using a Makefile](docs/makefile.md)
-8. [Troubleshooting](docs/troubleshooting.md)
-9. [Updating the template](docs/updating.md)
-
-## License
-
-Symfony Docker is available under the MIT License.
-
-## Credits
-
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+https://steamcommunity.com/dev
+https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0001.29

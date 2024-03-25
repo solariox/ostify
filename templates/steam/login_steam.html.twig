@@ -5,6 +5,6 @@
     <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0">
     <input type="hidden" name="openid.mode" value="checkid_setup">
     <input type="hidden" name="openid.realm" value="{{ app.request.schemeAndHttpHost }}">
-    <input type="hidden" name="openid.return_to" value="{{ url('app_steam_callback') }}">
+    <input type="hidden" name="openid.return_to" value="{{ url('app_http_steam_callback') }}">
     <input type="image" name="submit" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" border="0" alt="Submit">
 </form>
