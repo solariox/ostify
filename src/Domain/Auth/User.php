@@ -21,6 +21,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    private ?string $steamId = null;
+
     /**
      * @var string The hashed password
      */
@@ -96,5 +98,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getSteamId(): ?string
+    {
+        return $this->steamId;
+    }
+
+    public function setSteamId(?string $steamId): void
+    {
+        $this->steamId = $steamId;
     }
 }

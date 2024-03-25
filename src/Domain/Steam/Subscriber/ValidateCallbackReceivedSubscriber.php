@@ -3,6 +3,7 @@
 namespace App\Domain\Steam\Subscriber;
 
 use App\Domain\Steam\Event\CallbackReceivedEvent;
+use App\Domain\Steam\Event\PayloadValidEvent;
 use App\Domain\Steam\Exception\InvalidCallbackPayloadException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -13,9 +14,10 @@ class ValidateCallbackReceivedSubscriber implements EventSubscriberInterface
     const STEAM_VALIDATION_URL = 'https://steamcommunity.com/openid/login';
 
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private HttpClientInterface $client
-    ) {}
+        private HttpClientInterface $client,
+        private EventDispatcherInterface $eventDispatcher
+    ) {
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -43,7 +45,7 @@ class ValidateCallbackReceivedSubscriber implements EventSubscriberInterface
             throw new InvalidCallbackPayloadException();
         }
 
-//        $this->eventDispatcher->dispatch(new PayloadValidEvent($callback->getCommunityId()), PayloadValidEvent::NAME);
+        $this->eventDispatcher->dispatch(new PayloadValidEvent($callback->getCommunityId()), PayloadValidEvent::NAME);
     }
 }
 

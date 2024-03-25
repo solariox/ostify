@@ -7,14 +7,19 @@
         <h1>Hello</h1>
     </div>
     {% if app.user %}
-        Hi {{ app.user.email }}
+        Logged: {{ app.user.email }}
         <a href="{{ path('app_logout') }}">Logout</a>
+        <hr>
     {% else %}
         <a href="{{ path('app_login') }}">Login</a>
-        <hr>
-        OR
-        <hr>
-        {% include 'steam/login_steam.html.twig' %}
     {% endif %}
+    <hr>
+    STEAM:
+    {% include 'steam/login_steam.html.twig' %}
+
+    <hr>
+    spotify:
+    {#        {% include 'spotify/login_spotify.html.twig' %} #}
+
 
 {% endblock %}

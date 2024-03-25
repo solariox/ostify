@@ -4,15 +4,19 @@ The main goal of this project is to create a simple and easy to use tool for cre
 
 ## How it works
 
+**This is actually more a training project than a real project, so it's not really working yet. 
+It may be a bit overkill sometimes, because it is for challenging myself**
+
 The program will scan your steam account for games that have a soundtrack and then search spotify for the soundtrack. 
 If it finds a soundtrack it will suggest it to you and you can choose to add it to your library or not.
 
 ## Explanation of the project structure
 See ([config](CONFIG.md)) to see the doc of how run the project
 
- code structure based on hexagonal/clean architecture, inspired by https://github.com/Grafikart/Grafikart.fr/
-this is more of a long term goal, but it will help me to keep the code clean and organized. It will also help me to keep the code testable and easy to maintain.
-Also, I admit this is a bit overkill for a small project like this, but it's a good opportunity to learn and practice this architecture.
+Code structure is based on hexagonal/clean architecture, inspired by https://github.com/Grafikart/Grafikart.fr/
+This is more of a long term goal, but it will help me to keep the code clean and organized.
+It will also help me to keep the code testable and easy to maintain.
+I admit this is a bit overkill for a small project like this, but it's a good opportunity to learn and practice this architecture.
 - Domain will be the core of the application, it will contain the entities, events, subscribers, and services. 
   All of this need to be isolated, and it needs to communicate with the application layer only through services.
   For example, controllers don't need to call repositories directly, they need to call services that will call repositories.
@@ -21,7 +25,7 @@ Also, I admit this is a bit overkill for a small project like this, but it's a g
 - Infrastructure will be the infrastructure layer, it will contain the system related stuff, in opposite to the domain layer that will contain the business logic. 
   We will have stuffs like fixtures, ORM, Security...
   
-## steps of development
+## steps of development (not in order)
 # 1 - Initial POC 
 - [ ] Create an account on the app. 
 - [ ] can get info from steam
@@ -43,6 +47,14 @@ Also, I admit this is a bit overkill for a small project like this, but it's a g
 - [ ] Use another API for the initial login part. Maybe keycloak,  Google, Facebook, Twitter, etc...
 - [ ] Add social features, like sharing playlists, following other users, etc...
 - [ ] Add a recommendation system, based on the games you play, the music you listen to, the games you own, etc...
+
+# 3 - TODO
+- [ ] Find and use a good library for front design (tailwind?)
+- [ ] Use React for fragments
+
+## Question
+- What should be the main way to register into the app? Using steam, or using a custom account?
+
 
 ## Docs
 https://steamcommunity.com/dev

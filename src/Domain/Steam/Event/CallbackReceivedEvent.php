@@ -7,7 +7,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class CallbackReceivedEvent extends Event
 {
-    CONST NAME = 'app.steam.callback_received';
+    CONST NAME = 'app.steam_authentication_bundle.callback_received';
 
     public function __construct(protected SteamCallbackDto $steamCallback)
     {}
