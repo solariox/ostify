@@ -2,6 +2,7 @@
 
 namespace App\Domain\Steam\Subscriber;
 
+use App\Domain\Auth\User;
 use App\Domain\Steam\Event\AuthenticateUserEvent;
 use App\Domain\Steam\Event\FirstLoginEvent;
 use App\Domain\Steam\Event\PayloadValidEvent;
@@ -44,6 +45,10 @@ class LoadUserSubscriber implements EventSubscriberInterface
         }
         $this->security->login($user);
         $this->eventDispatcher->dispatch(new AuthenticateUserEvent($user), AuthenticateUserEvent::NAME);
+    }
+
+    public function updateUserInfoFromSteam(User $user)
+    {
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Auth;
 
+use App\Domain\Steam\DTO\SteamInfoDto;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -19,8 +20,6 @@ class User implements UserInterface
 
     #[ORM\Column(unique: true)]
     private ?string $steamId = null;
-
-
 
     public function getId(): ?int
     {

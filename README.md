@@ -59,3 +59,4 @@ I admit this is a bit overkill for a small project like this, but it's a good op
 ## Docs
 https://steamcommunity.com/dev
 https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0001.29
+TODO: Check this doc: https://partner.steamgames.com/doc/home  / https://partner.steamgames.com/doc/webapi/ISteamApps
