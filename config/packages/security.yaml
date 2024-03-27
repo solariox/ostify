@@ -8,7 +8,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Domain\Auth\User
-                property: email
+                property: steamId
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

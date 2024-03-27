@@ -7,7 +7,7 @@
         <h1>Hello</h1>
     </div>
     {% if app.user %}
-        Logged: {{ app.user.email }}
+        Logged: {{ app.user.steamId }}
         <a href="{{ path('app_logout') }}">Logout</a>
         <hr>
     {% else %}
