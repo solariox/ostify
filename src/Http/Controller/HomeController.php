@@ -22,8 +22,8 @@ class HomeController extends AbstractController
         if ($user) {
             $games = $this->steamService->getAllGamesOfUser($user);
             $steamInfoDto = $this->steamService->updateUserInfoFromSteam($user);
+            dump($games);
         }
-        dump($games);
         return $this->render('home/index.html.twig', [
             'steamInfoDto' => $steamInfoDto ?? null,
             'games' => $games ?? null,

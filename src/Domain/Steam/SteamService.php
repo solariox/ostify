@@ -16,7 +16,6 @@ class SteamService
 
     public function getAllGamesOfUser(User $user): array
     {
-        // e.g. create user entity and persist it
         $steamKey = $_ENV['STEAM_API_KEY'];
         $steamGamesRequest = $this->client->request(
             'GET',
