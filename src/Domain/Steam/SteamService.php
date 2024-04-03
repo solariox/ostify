@@ -3,9 +3,9 @@
 namespace App\Domain\Steam;
 
 use App\Domain\Auth\User;
+use App\Domain\Steam\DTO\SteamGameDetailDto;
 use App\Domain\Steam\DTO\SteamGameDto;
 use App\Domain\Steam\DTO\SteamInfoDto;
-use SteamGameDetailDto;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class SteamService

@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Domain\Steam\DTO;
 class SteamGameDetailDto
 {
     public function __construct(
