@@ -14,8 +14,7 @@ class HomeController extends AbstractController
     public function __construct(
         private SteamService $steamService,
         private SpotifyWebApi $spotifyService,
-    )
-    {
+    ) {
     }
 
     #[Route('/', name: 'app_home')]
@@ -26,12 +25,19 @@ class HomeController extends AbstractController
         if ($user) {
             $games = $this->steamService->getAllGamesOfUser($user);
             $steamInfoDto = $this->steamService->updateUserInfoFromSteam($user);
+            $spotifyData = [];
+            foreach ($games as $game) {
+                $spotifyData[$game->steam_appid] = $this->spotifyService->search($game->name);
+            }
             $this->spotifyService->search('toto');
         }
+        dump($spotifyData);
+
 
         return $this->render('home/index.html.twig', [
             'steamInfoDto' => $steamInfoDto ?? null,
             'games' => $games ?? null,
+            'spotifyData' => $spotifyData ?? null,
         ]);
     }
 }

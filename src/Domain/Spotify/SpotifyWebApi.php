@@ -3,6 +3,7 @@
 namespace App\Domain\Spotify;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -19,21 +20,17 @@ class SpotifyWebApi
         protected string $spotifyClientId,
         #[Autowire(env: 'SPOTIFY_CLIENT_SECRET')]
         protected string $spotifyClientSecret,
-        protected HttpClientInterface $client
+        protected HttpClientInterface $client,
+        protected RequestStack $requestStack,
     ) {
-//        $this->session = new SpotifySession($this->spotifyClientId, $this->spotifyClientSecret);
-        $this->accessToken = $this->getAccessToken();
-    }
-
-    public function getAccessToken(): string
-    {
+        $this->accessToken = $this->requestStack->getSession()->get('spotify_access_token');
         if (!$this->accessToken) {
-            $this->requestAccessToken();
+            $this->accessToken = $this->requestAccessToken();
+            $this->requestStack->getSession()->set('spotify_access_token', $this->accessToken);
         }
-        return $this->accessToken;
     }
 
-    private function requestAccessToken(): void
+    private function requestAccessToken(): string
     {
         $response = $this->client->request(
             'POST',
@@ -55,7 +52,7 @@ class SpotifyWebApi
             throw new SpotifyRequestException();
         }
 
-        $this->accessToken = $response->access_token;
+        return $response->access_token;
     }
 
     public function search(
@@ -75,9 +72,8 @@ class SpotifyWebApi
         ];
 
         $response = $this->request('GET', '/v1/search', $payload);
-        dump($response->getContent());
+        return json_decode($response->getContent());
     }
-
 
     private function request(string $method, string $uri, array $params): ResponseInterface
     {
@@ -88,7 +84,6 @@ class SpotifyWebApi
 //            ->setBearerAuthorization($authorizationToken)
 //            ->setPayload($payload);
         $url = self::API_URL . $uri . '?' . http_build_query($params);
-        dump($url);
 
         return $this->client->request(
             $method,

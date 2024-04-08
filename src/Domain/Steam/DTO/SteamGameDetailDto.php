@@ -43,6 +43,7 @@ class SteamGameDetailDto
         public ?array $ratings = null,
         public ?string $controller_support = null,
         public ?array $demos = null,
+        public ?array $movies = null,
     ) {
     }
 }

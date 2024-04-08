@@ -14,6 +14,15 @@ class SteamService
     {
     }
 
+    /**
+     * @param User $user
+     * @return SteamGameDetailDto[]
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
     public function getAllGamesOfUser(User $user): array
     {
         $steamKey = $_ENV['STEAM_API_KEY'];
@@ -36,7 +45,7 @@ class SteamService
                 ));
             $gameDetailDto = new SteamGameDetailDto(...$steamGameRequest->toArray()[$dto->appid]['data']);
             return $gameDetailDto;
-        }, array_slice($steamGamesRequest->toArray()['response']['games'], 0, 2));
+        }, array_slice($steamGamesRequest->toArray()['response']['games'], 0, 5));
 
         return $steamGamesInfo;
     }
