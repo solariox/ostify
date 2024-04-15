@@ -29,9 +29,7 @@ class HomeController extends AbstractController
             foreach ($games as $game) {
                 $spotifyData[$game->steam_appid] = $this->spotifyService->search($game->name);
             }
-            $this->spotifyService->search('toto');
         }
-        dump($spotifyData);
 
 
         return $this->render('home/index.html.twig', [
